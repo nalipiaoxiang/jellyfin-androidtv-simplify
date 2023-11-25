@@ -44,6 +44,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.UUID
 
+/**
+ * 这是app的启动页，
+ * 用于检测网络权限，检测是否已登录，检测是否已选择服务器，检测是否已选择用户，
+ * 检测是否已选择媒体库，检测是否已选择播放器，检测是否已选择播放列表，检测是否已选择播放器，
+ * 检测是否已选择播放列表，检测是否已选择播放器，检测是否已选择播放列表，检测是否
+ */
 class StartupActivity : FragmentActivity() {
 	companion object {
 		const val EXTRA_ITEM_ID = "ItemId"
@@ -60,16 +66,21 @@ class StartupActivity : FragmentActivity() {
 
 	private lateinit var binding: ActivityMainBinding
 
+	/**
+	 * 对传入的权限数组进行检查，如果有任何一个权限被拒绝，则退出应用。
+	 */
 	private val networkPermissionsRequester = registerForActivityResult(
 		ActivityResultContracts.RequestMultiplePermissions()
 	) { grants ->
 		val anyRejected = grants.any { !it.value }
 
 		if (anyRejected) {
+			//权限检查不通过，退出应用
 			// Permission denied, exit the app.
 			Toast.makeText(this, R.string.no_network_permissions, Toast.LENGTH_LONG).show()
 			finish()
 		} else {
+			//权限检查通过，继续执行
 			onPermissionsGranted()
 		}
 	}
@@ -87,6 +98,11 @@ class StartupActivity : FragmentActivity() {
 		if (!intent.getBooleanExtra(EXTRA_HIDE_SPLASH, false)) showSplash()
 
 		// Ensure basic permissions
+		/**
+		 * 检查权限
+		 * 用于允许应用程序访问互联网
+		 * 用于允许应用程序访问网络状态信息，例如网络连接状态和数据使用情况。
+		 */
 		networkPermissionsRequester.launch(arrayOf(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE))
 	}
 
