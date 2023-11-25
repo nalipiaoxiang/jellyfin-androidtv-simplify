@@ -112,11 +112,15 @@ class StartupActivity : FragmentActivity() {
 		applyTheme()
 	}
 
+	/**
+	 * 在权限检查通过后，检查是否已登录，如果未登录，则显示登录界面。
+	 */
 	private fun onPermissionsGranted() = sessionRepository.state
 		.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
 		.filter { it == SessionRepositoryState.READY }
 		.onEach {
 			val session = sessionRepository.currentSession.value
+			//session!= null说明已经登录
 			if (session != null) {
 				Timber.i("Found a session in the session repository, waiting for the currentUser in the application class.")
 
@@ -129,6 +133,7 @@ class StartupActivity : FragmentActivity() {
 					openNextActivity()
 				}
 			} else {
+				//没有session，显示登录界面
 				// Clear audio queue in case left over from last run
 				mediaManager.clearAudioQueue()
 
