@@ -23,8 +23,9 @@ import java.util.UUID
 /**
  * Storage for authentication related entities. Stores servers with users inside, including
  * access tokens.
- *
+ *	与身份验证相关的实体的存储。存储带有用户的服务器，包括访问令牌。
  * The data is stored in a JSON file located in the applications data directory.
+ * 数据存储在位于应用程序数据目录中的 JSON 文件中。
  */
 class AuthenticationStore(
 	private val context: Context,

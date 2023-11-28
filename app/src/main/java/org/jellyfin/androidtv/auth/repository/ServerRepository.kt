@@ -62,6 +62,11 @@ class ServerRepositoryImpl(
 	override val discoveredServers = _discoveredServers.asStateFlow()
 
 	// Loading data
+	/**
+	 * 它从authenticationStore获取服务器列表，
+	 * 将每个服务器添加到StoredServers的列表中，
+	 * 并按最后访问日期和名称进行降序排序。
+	 */
 	override suspend fun loadStoredServers() {
 		authenticationStore.getServers()
 			.map { (id, entry) -> entry.asServer(id) }
