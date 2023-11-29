@@ -48,7 +48,7 @@ class ServerAddFragment : Fragment() {
 				}
 			}
 		}
-
+		//输入服务器地址后连接
 		with(binding.confirm) {
 			setOnClickListener { submitAddress() }
 		}

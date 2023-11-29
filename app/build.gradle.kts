@@ -21,6 +21,10 @@ android {
 		versionName = project.getVersionName()
 		versionCode = getVersionCode(versionName!!)
 		setProperty("archivesBaseName", "jellyfin-androidtv-v$versionName")
+
+		//语言
+		resValue("string", "locale", "zh-rCN")
+
 	}
 
 	buildFeatures {

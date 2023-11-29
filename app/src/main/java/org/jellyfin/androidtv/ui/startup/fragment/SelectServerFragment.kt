@@ -183,6 +183,9 @@ class SelectServerFragment : Fragment() {
 		}
 
 		// Manual
+		/**
+		 * 手动点击 Enter server address 按钮
+		 */
 		binding.enterServerAddress.setOnClickListener {
 			parentFragmentManager.commit {
 				addToBackStack(null)
